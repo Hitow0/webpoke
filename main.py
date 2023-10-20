@@ -14,13 +14,13 @@ class PokemonForm(FlaskForm):
     nom = StringField("nom", validators=[DataRequired()])
 
 
-@app.route("/index", methods=['GET', 'POST'])
+@app.route("/", methods=['GET', 'POST'])
 def index():
     pokemon_form = PokemonForm()
     if pokemon_form.validate_on_submit():
         response = requests.get('https://api-pokemon-fr.vercel.app/api/v1/pokemon/argouste')
         response_data_json = response.json()
-        return render_template('index.html', adresse_json=response_data_json)
+        return render_template('pokedex.html', adresse_json=response_data_json)
     return render_template('index.html', form=pokemon_form)
 
 
