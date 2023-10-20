@@ -7,8 +7,10 @@ from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired
 
+
 app = Flask(__name__)
-app.secret_key = "Pokedex !"
+app.secret_key = "WebPoke"
+
 
 class PokemonForm(FlaskForm):
     nom = StringField("nom", validators=[DataRequired()])
@@ -16,12 +18,15 @@ class PokemonForm(FlaskForm):
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
-    pokemon_form = PokemonForm()
-    if pokemon_form.validate_on_submit():
-        response = requests.get('https://api-pokemon-fr.vercel.app/api/v1/pokemon/argouste')
-        response_data_json = response.json()
-        return render_template('pokedex.html', adresse_json=response_data_json)
-    return render_template('index.html', form=pokemon_form)
+    pokedex_form = PokemonForm()
+    if pokedex_form.validate_on_submit():
+        print("test")
+        response = requests.get(
+            f'https://api-pokemon-fr.vercel.app/api/v1/pokemon/{pokedex_form.nom.data}')
+        reponse_data_json = response.json()
+        print(reponse_data_json)
+        return render_template('index.html', pokedex_json=reponse_data_json)
+    return render_template('index.html', pokedex_json=None, form=pokedex_form)
 
 
 if __name__ == '__main__':
