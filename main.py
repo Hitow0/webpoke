@@ -9,13 +9,25 @@ from wtforms.validators import DataRequired
 
 
 app = Flask(__name__)
+app.secret_key = "WebPoke"
+
 
 class PokemonForm(FlaskForm):
     nom = StringField("nom", validators=[DataRequired()])
 
-@app.route("/")
+
+@app.route("/", methods=['GET', 'POST'])
 def index():
-    pass
+    pokedex_form = PokemonForm()
+    if pokedex_form.validate_on_submit():
+        print("test")
+        response = requests.get(
+            f'https://api-pokemon-fr.vercel.app/api/v1/pokemon/{pokedex_form.nom.data}')
+        reponse_data_json = response.json()
+        print(reponse_data_json)
+        return render_template('index.html', pokedex_json=reponse_data_json)
+    return render_template('index.html', pokedex_json=None, form=pokedex_form)
+
 
 if __name__ == '__main__':
     app.run()

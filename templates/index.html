@@ -4,20 +4,27 @@
     <meta charset="UTF-8">
     <link href="CSS/style.css" rel="stylesheet">
     <title>WebPoke</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 </head>
 <body>
     <h1>
-        Bienvenue dans le Pokédex
+        Pokédex
     </h1>
 
-    <form action="/pokedex" method="post">
-        <fieldset>
-            <legend> Entrer le nom du Pokémon </legend>
-            <label for="nom">Nom du Pokémon :</label>
-            <input type="text" id="nom" placeholder="Entrer un nom">
-        </fieldset>
-        <input type="submit" value="Valider" />
+    {% if form %}
+    <form method="post" action="/">
+        <legend> Entrer le nom du Pokémon </legend>
+        {{ form.csrf_token }}
+        {{ form.nom.label }} : {{ form.nom() }}
+        <input class="button is-success is-small" type="submit" value="Go">
     </form>
+    {% endif %}
+
+    {% if pokedex_json %}
+        <p style="text-align: center; color: black">
+            Nom : {{pokedex_json.name.fr}}<br>
+        </p>
+    {% endif %}
 
 </body>
 </html>
