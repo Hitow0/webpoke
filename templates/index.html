@@ -9,6 +9,7 @@
         Pokédex
     </h1>
 
+    {% if form %}
     <form action="/pokedex" method="post">
         <fieldset>
             <legend> Entrer le nom du Pokémon </legend>
@@ -16,6 +17,7 @@
             <input type="text" id="nom" placeholder="Entrer un nom">
         </fieldset>
     </form>
+    {% endif %}
 
 </body>
 </html>
