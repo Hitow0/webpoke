@@ -25,6 +25,8 @@ def index():
             f'https://api-pokemon-fr.vercel.app/api/v1/pokemon/{pokedex_form.nom.data}')
         reponse_data_json = response.json()
         print(reponse_data_json)
+        if len(reponse_data_json)==2:
+            return render_template('index.html', pokedex_json=None, form=pokedex_form)
         return render_template('index.html', pokedex_json=reponse_data_json)
     return render_template('index.html', pokedex_json=None, form=pokedex_form)
 
