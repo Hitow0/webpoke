@@ -1,0 +1,17 @@
+*{
+margin: 0;
+padding: 0;
+}
+header{
+
+width: auto;
+margin-top: 0%;
+padding: 6%;
+background-color: #FF0000;
+}
+
+div {
+display:flex;
+justify-content:center;
+align-items: center;
+}
