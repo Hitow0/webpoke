@@ -1,29 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>WebPoke</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="staticFolder/CSS/style.css">
 </head>
 <body>
-    <h1>
-        Pokédex
-    </h1>
 
-    {% if form %}
-    <form method="post" action="/">
-        <legend> Entrer le nom du Pokémon </legend>
-        {{ form.csrf_token }}
-        {{ form.nom.label }} : {{ form.nom() }}
-        <input class="button is-success is-small" type="submit" value="Go">
-    </form>
-    {% endif %}
+    <div class="divDex" >
+        {% if form %}
+        <form method="post" action="/">
+            
+            <div class="nameRecherch">
+                <legend class="text"> Entrer le nom du Pokémon </legend>
+                {{ form.csrf_token }}
+                {{ form.nom.label }} : 
+                {{ form.nom() }}
+                <input class="button" type="submit" value="Go">
+            </div>
+        </form>
+        {% endif %}
 
-    {% if pokedex_json %}
-        <p style="text-align: center; color: black">
-            Nom : {{pokedex_json.name.fr}}<br>
-        </p>
-    {% endif %}
+        {% if pokedex_json %}
+            <img src="{{ pokedex_json.sprites.regular}}" alt="">
+            <p class="nom">
+            {{pokedex_json.name.fr}}<br>
+            </p>
+            <p class="description">
+                {{pokedex_json.name.fr}} est un Pokémon de catégory '{{pokedex_json.category}}' de la génération {{pokedex_json.generation}}.
+            </p>
+        {% endif %}
+    </div>
+    
 
 </body>
 </html>

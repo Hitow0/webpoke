@@ -8,12 +8,12 @@ from wtforms import StringField
 from wtforms.validators import DataRequired
 
 
-app = Flask(__name__)
+app = Flask(__name__,template_folder='templates',static_folder='staticFolder')
 app.secret_key = "WebPoke"
 
 
 class PokemonForm(FlaskForm):
-    nom = StringField("nom", validators=[DataRequired()])
+    nom = StringField("", validators=[DataRequired()])
 
 
 @app.route("/", methods=['GET', 'POST'])
