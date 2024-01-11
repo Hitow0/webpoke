@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>WebPoke</title>
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/index.css') }}">
+    </head>
+    <body>
+
+        <script>
+            function redirectSearch() {
+                window.location.href = `/pokemon`;
+            }
+
+            function redirectGame() {
+                window.location.href = `/game`;
+            }
+
+            function redirectPokedex() {
+                window.location.href = `/pokedex`;
+            }
+        </script>
+
+        <div class="pokedex">
+            <div class="top-part">
+                <div class="inner">
+                    <img src="{{ url_for('static', filename='img/WebPoke-21-10-2023.png') }}" alt="webpoke">
+                </div>
+            </div>
+            <div class="bottom-part">
+                <div class="inner">
+                    <p class="home-title">Cliquez sur la catégorie qui vous intéresse</p>
+                    <div class="cards">
+                        <div class="card-search card" onclick="redirectSearch()">
+                            <p>Rechercher</p>
+                        </div>
+
+                        <div class="card-game card" onclick="redirectGame()">
+                            <p>Jouer</p>
+                        </div>
+
+                        <div class="card-pokedex card" onclick="redirectPokedex()">
+                            <p>Pokedex</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
