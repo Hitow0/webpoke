@@ -114,3 +114,81 @@ body {
   width: 25vw;
   margin-top:0.4vw;
 }
+
+inner-found{
+  grid-template-columns: 40% 60%;
+  background-color: rgba(30, 30, 30, 1);
+  width:calc(100% - 4vw);
+  height:calc(100% - 4vw);
+  border-radius:1.56vw;
+  display: grid;
+}
+
+.pokemon-sprite{
+  grid-column: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.pokemon-sprite > p{
+  position: absolute;
+  bottom: 73%;
+  right: 85%;
+  font-size: 1.5vw;
+}
+
+.pokemon-sprite > .button-shiny{
+  position: absolute;
+  bottom: 81.2%;
+  right: 63.5%;
+  width:0;
+  height: 0;
+  background-color: rgba(30, 30, 30, 1);
+  border:none;
+  cursor:pointer;
+}
+
+.pokemon-sprite > .button-shiny > svg{
+  position: absolute;
+  bottom: 81%;
+  right: 63.5%;
+  width: 1.15vw;
+  height: 1.15vw;
+}
+
+.pokemon-sprite > .pokeball{
+  position: relative;
+  width: 16vw;
+  mix-blend-mode: hard-light;
+}
+
+.pokemon-sprite > .sprite{
+  position: absolute;
+  width: 12vw;
+  left:22%;
+  transform: translate(-47%, -10%);
+}
+
+.pokemon-sprite > .evolution{
+  display: flex;
+  gap:1vw;
+}
+
+.pokemon-sprite > .evolution > .button-evolution{
+  display: flex;
+  border:none;
+  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.50);
+  background-color: #454545;
+  border-radius:1.56vw;
+  align-items: center;
+  justify-content: center;
+  width: 1.9791666666666667vw;
+  height: 1.9791666666666667vw;
+  cursor:pointer;
+}
+
+.pokemon-sprite > .evolution > .button-evolution > img{
+  width: 1.09375vw;
+}
