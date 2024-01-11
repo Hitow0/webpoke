@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lalezar&display=swap');
+
+body {
+  font-family: Lalezar;
+  color:white;
+  background-color: rgba(24, 26, 30, 1);
+}
+
+.pokedex {
+  display: flex;
+  justify-content: center;
+  margin-top: 5vh;
+  height:80vh;
+}
+
+
+.pokedex > .top-part{
+  position:relative;
+  z-index: 2;
+  background-color: rgba(255, 80, 80, 1);
+  width: 50vw;
+  height:50vh;
+  border-radius:1.56vw;
+  box-shadow: 0 0.2vw 0.2vw 0 rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pokedex > .top-part > .inner{
+  background-color: rgba(30, 30, 30, 1);
+  width:calc(100% - 4vw);
+  height:calc(100% - 4vw);
+  border-radius:1.56vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pokedex > .top-part > .inner > img{
+  width: 30vw;
+}
+
+.pokedex > .bottom-part{
+  position:absolute;
+  z-index: 1;
+  top: 53.5vh;
+  background-color: rgba(255, 80, 80, 1);
+  width: 80vw;
+  height:40vh;
+  border-radius:1.56vw;
+  box-shadow: 0 0.2vw 0.2vw 0 rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pokedex > .bottom-part > .inner{
+  background-color: rgba(30, 30, 30, 1);
+  width:calc(100% - 4vw);
+  height:calc(100% - 4vw);
+  border-radius:1.56vw;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.pokedex > .bottom-part > .inner > p{
+  margin:3vw 0;
+  font-size: 1.7vw;
+}
+.pokedex > .bottom-part > .inner > .search-bar > form{
+  display: flex;
+}
+
+
+.pokedex > .bottom-part > .inner > .search-bar > form > #nom{
+  height: 3.5vh;
+  width: 25vw;
+  background-color: rgba(0,0,0,0.25);
+  border-radius: 1.7vw 0 0 1.7vw;
+  color: white;
+  font-size: 1.5vw;
+  padding: 0;
+  padding-block: 0;
+  padding-inline: 0;
+  border: none;
+  text-align: center;
+}
+
+.pokedex > .bottom-part > .inner > .search-bar > form > .button{
+  height: 3.5vh;
+  width: 3vw;
+  background-color: rgba(0,0,0,0.25);
+  border-radius: 0 1.7vw 1.7vw 0;
+  cursor:pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  padding-block: 0;
+  padding-inline: 0;
+  border: none;
+}
+
+.pokedex > .bottom-part > .inner > .search-bar > form > .button > svg{
+  width: 1.5vw;
+}
+
+.pokedex > .bottom-part > .inner > .search-bar > .msg{
+  font-style: italic;
+  font-weight: 100;
+  color: #ff2937;
+  text-align: center;
+  width: 25vw;
+  margin-top:0.4vw;
+}
+
+.inner-found{
+  grid-template-columns: 40% 60%;
+  background-color: rgba(30, 30, 30, 1);
+  width:calc(100% - 4vw);
+  height:calc(100% - 4vw);
+  border-radius:1.56vw;
+  display: grid;
+}
+
+.pokemon-sprite{
+  grid-column: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.pokemon-sprite > p{
+  position: absolute;
+  bottom: 73%;
+  right: 85%;
+  font-size: 1.5vw;
+}
+
+.pokemon-sprite > .button-shiny{
+  position: absolute;
+  bottom: 81.2%;
+  right: 63.5%;
+  width:0;
+  height: 0;
+  background-color: rgba(30, 30, 30, 1);
+  border:none;
+  cursor:pointer;
+}
+
+.pokemon-sprite > .button-shiny > svg{
+  position: absolute;
+  bottom: 81%;
+  right: 63.5%;
+  width: 1.15vw;
+  height: 1.15vw;
+}
+
+.pokemon-sprite > .pokeball{
+  position: relative;
+  width: 16vw;
+  mix-blend-mode: hard-light;
+}
+
+.pokemon-sprite > .sprite{
+  position: absolute;
+  width: 12vw;
+  left:22%;
+  transform: translate(-47%, -10%);
+}
+
+.pokemon-sprite > .evolution{
+  display: flex;
+  gap:1vw;
+}
+
+.pokemon-sprite > .evolution > .button-evolution{
+  display: flex;
+  border:none;
+  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.50);
+  background-color: #454545;
+  border-radius:1.56vw;
+  align-items: center;
+  justify-content: center;
+  width: 1.9791666666666667vw;
+  height: 1.9791666666666667vw;
+  cursor:pointer;
+}
+
+.pokemon-sprite > .evolution > .button-evolution > img{
+  width: 1.09375vw;
+}
+
+
+.pokemon-informations{
+  grid-column: 2;
+  border-radius:1.56vw;
+  margin: 2.0833333333333335vw 2.0833333333333335vw 2.0833333333333335vw 2.0833333333333335vw;
+  background: #454545;
+}
+
+.pokemon-informations > .name-line {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.pokemon-informations > .name-line > p {
+  margin-right: 0;
+  margin-left: 1vw;
+  margin-top:0.5vw;
+  font-size: 1.5vw;
+}
+
+.pokemon-informations > .name-line > .types-images {
+  display: flex;
+  margin-right: 1vw;
+  margin-top:0.5vw;
+  gap: 0.5vw;
+  margin-left: auto;
+}
+
+.pokemon-informations > .name-line > .types-images > img {
+  border-radius: 1.56vw;
+  width: 2.2916666666666665vw;
+  height: 2.2916666666666665vw;
+}
