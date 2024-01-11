@@ -1,0 +1,50 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+    height: 100%;
+    width: 100%;
+    background-color: gray;
+    
+
+}
+
+
+
+.divDex{
+    margin-top: px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 1200px;
+    width: 800px;
+    background-image: url("../images/pokédex.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-color: gray;
+}
+.divDex>img{
+    margin-top: 25%;
+    margin-left: 144px;
+}
+
+.nom{
+    margin-top: 25%;
+    margin-left: 8%;
+}
+form>.nameRecherch{
+    margin-top: 10%;
+    margin-left: 8%;
+}
+
+.description{
+    margin-top: 8%;
+    margin-left: 32%;
+    width: 40%;       
+}
+    
+input{
+    background: red;
+    border: 0px;
+}
+
