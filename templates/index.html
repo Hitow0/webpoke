@@ -10,11 +10,11 @@
     <div class="divDex" >
         {% if form %}
         <form method="post" action="/">
-            
+
             <div class="nameRecherch">
                 <legend class="text"> Entrer le nom du Pokémon </legend>
                 {{ form.csrf_token }}
-                {{ form.nom.label }} : 
+                {{ form.nom.label }} :
                 {{ form.nom() }}
                 <input class="button" type="submit" value="Go">
             </div>
@@ -31,7 +31,7 @@
             </p>
         {% endif %}
     </div>
-    
+
 
 </body>
 </html>
