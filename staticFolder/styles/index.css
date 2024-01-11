@@ -192,3 +192,38 @@ inner-found{
 .pokemon-sprite > .evolution > .button-evolution > img{
   width: 1.09375vw;
 }
+
+.pokemon-informations{
+  grid-column: 2;
+  border-radius:1.56vw;
+  margin: 2.0833333333333335vw 2.0833333333333335vw 2.0833333333333335vw 2.0833333333333335vw;
+  background: #454545;
+}
+
+.pokemon-informations > .name-line {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.pokemon-informations > .name-line > p {
+  margin-right: 0;
+  margin-left: 1vw;
+  margin-top:0.5vw;
+  font-size: 1.5vw;
+}
+
+.pokemon-informations > .name-line > .types-images {
+  display: flex;
+  margin-right: 1vw;
+  margin-top:0.5vw;
+  gap: 0.5vw;
+  margin-left: auto;
+}
+
+.pokemon-informations > .name-line > .types-images > img {
+  border-radius: 1.56vw;
+  width: 2.2916666666666665vw;
+  height: 2.2916666666666665vw;
+}
