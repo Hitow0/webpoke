@@ -39,3 +39,78 @@ body {
 .pokedex > .top-part > .inner > img{
   width: 30vw;
 }
+
+.pokedex > .bottom-part{
+  position:absolute;
+  z-index: 1;
+  top: 53.5vh;
+  background-color: rgba(255, 80, 80, 1);
+  width: 80vw;
+  height:40vh;
+  border-radius:1.56vw;
+  box-shadow: 0 0.2vw 0.2vw 0 rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pokedex > .bottom-part > .inner{
+  background-color: rgba(30, 30, 30, 1);
+  width:calc(100% - 4vw);
+  height:calc(100% - 4vw);
+  border-radius:1.56vw;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.pokedex > .bottom-part > .inner > p{
+  margin:3vw 0;
+  font-size: 1.7vw;
+}
+.pokedex > .bottom-part > .inner > .search-bar > form{
+  display: flex;
+}
+
+
+.pokedex > .bottom-part > .inner > .search-bar > form > #nom{
+  height: 3.5vh;
+  width: 25vw;
+  background-color: rgba(0,0,0,0.25);
+  border-radius: 1.7vw 0 0 1.7vw;
+  color: white;
+  font-size: 1.5vw;
+  padding: 0;
+  padding-block: 0;
+  padding-inline: 0;
+  border: none;
+  text-align: center;
+}
+
+.pokedex > .bottom-part > .inner > .search-bar > form > .button{
+  height: 3.5vh;
+  width: 3vw;
+  background-color: rgba(0,0,0,0.25);
+  border-radius: 0 1.7vw 1.7vw 0;
+  cursor:pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  padding-block: 0;
+  padding-inline: 0;
+  border: none;
+}
+
+.pokedex > .bottom-part > .inner > .search-bar > form > .button > svg{
+  width: 1.5vw;
+}
+
+.pokedex > .bottom-part > .inner > .search-bar > .msg{
+  font-style: italic;
+  font-weight: 100;
+  color: #ff2937;
+  text-align: center;
+  width: 25vw;
+  margin-top:0.4vw;
+}
