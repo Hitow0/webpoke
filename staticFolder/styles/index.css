@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lalezar&display=swap');
+
+body {
+  font-family: Lalezar;
+  color:white;
+  background-color: rgba(24, 26, 30, 1);
+}
+
+.pokedex {
+  display: flex;
+  justify-content: center;
+  margin-top: 5vh;
+  height:80vh;
+}
