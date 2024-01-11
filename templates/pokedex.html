@@ -39,6 +39,9 @@
     function redirectNextEvolution(nextEvolutionName) {
         window.location.href = `/pokemon/${nextEvolutionName}`;
     }
+    function redirectHomepage(){
+        window.location.href = `/`;
+    }
 </script>
 
 
@@ -98,9 +101,9 @@
         {% endif %}
         <div class="bottom-part">
             <div class="inner">
-                <p>Indiquez le pokémon recherché</p>
+                <p class="research-title">Indiquez le pokémon recherché</p>
                 <div class="search-bar">
-                    <form method="post" action="/">
+                    <form method="post" action="/pokemon">
                         {{ form.csrf_token }}
                         {{ form.nom() }}
                         <button class="button" type="submit">
@@ -113,6 +116,7 @@
                         <p class="msg">{{ msg }}</p>
                     {% endif %}
                 </div>
+                <button class="button-accueil" onclick="redirectHomepage()">Retour à l'accueil</button>
             </div>
         </div>
     </div>

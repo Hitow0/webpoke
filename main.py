@@ -16,6 +16,10 @@ class PokemonForm(FlaskForm):
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
+    return render_template('accueil.html')
+
+@app.route("/pokemon", methods=['GET', 'POST'])
+def pokemon_index():
     pokedex_form = PokemonForm()
     if pokedex_form.validate_on_submit():
         return redirect(url_for('pokemon_info', name=pokedex_form.nom.data))
@@ -30,6 +34,7 @@ def pokemon_info(name):
     if len(reponse_data_json) == 2:
         return render_template('pokedex.html', pokedex_json=None, form=pokedex_form, msg="Le pokemon n'existe pas.")
     return render_template('pokedex.html', pokedex_json=reponse_data_json, form=pokedex_form)
+
 
 
 if __name__ == '__main__':
