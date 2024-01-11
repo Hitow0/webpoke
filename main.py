@@ -7,7 +7,7 @@ from wtforms import StringField
 from wtforms.validators import DataRequired
 
 
-app = Flask(__name__, template_folder='templates', static_folder='static')
+app = Flask(__name__, template_folder='templates', static_folder='staticFolder')
 app.secret_key = "WebPoke"
 
 
@@ -31,6 +31,14 @@ def pokemon_info(name):
         return render_template('pokedex.html', pokedex_json=None, form=pokedex_form, msg="Le pokemon n'existe pas.")
     return render_template('pokedex.html', pokedex_json=reponse_data_json, form=pokedex_form)
 
+
+@app.route("/cri")
+def cri_poke():
+    return render_template('cri.html')
+
+@app.route('/getFileName')
+def getFileName():
+    return 'staticFolder/CrisPokemon/génération1/1 - bulbizarre.ogg'
 
 if __name__ == '__main__':
     app.run()

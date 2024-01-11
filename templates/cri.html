@@ -27,3 +27,25 @@ xhr.onreadystatechange = function() {
 
 </body>
 </html>
+
+<!--    <script>-->
+<!--        {% if pokedex_json %}-->
+
+<!--    var xhr = new XMLHttpRequest();-->
+<!--    xhr.open('GET', '/staticFolder/CrisPokemon/generation{pokedex_json.generation}/{pokedex_json.pokedexId} - {str.lower(pokedex_json.name)}', true);-->
+<!--    xhr.send();-->
+
+<!--    xhr.onreadystatechange = function() {-->
+<!--        if (this.readyState == 4) {-->
+<!--            var filePath = this.responseText;-->
+<!--            var audio = document.getElementById('mySong');-->
+<!--            audio.src = filePath;-->
+<!--            audio.load();-->
+<!--            audio.oncanplaythrough = function() {-->
+<!--                this.play();-->
+<!--            }-->
+<!--        }-->
+<!--    }-->
+<!--        { % endif % }-->
+
+<!--    </script>-->

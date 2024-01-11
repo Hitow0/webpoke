@@ -41,6 +41,30 @@
     }
 </script>
 
+    <script>
+
+    var xhr = new XMLHttpRequest();
+<!--    xhr.open('GET', '/staticFolder/CrisPokemon/génération1/1-bulbizarre.ogg', true);-->
+
+    xhr.open('GET', '/staticFolder/CrisPokemon/génération{{pokedex_json.generation}}/{{pokedex_json.pokedexId}}-{{pokedex_json.name.fr}}.ogg', true);
+    xhr.send();
+
+
+    xhr.onreadystatechange = function() {
+        if (this.readyState == 4) {
+            var filePath = this.responseText;
+            var audio = document.getElementById('mySong');
+            audio.src = filePath;
+            audio.load();
+            audio.oncanplaythrough = function() {
+                this.play();
+            }
+        }
+    }
+
+
+    </script>
+
 
     {% if form %}
         <div class="pokedex">
@@ -85,6 +109,8 @@
                                 <img src="{{ types.image }}" alt="{{types.name}}">
                             {% endfor %}
                             </div>
+                            <audio id="mySong" src="" controls></audio>
+
                         </div>
                     </div>
                 </div>
