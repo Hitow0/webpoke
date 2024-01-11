@@ -21,5 +21,16 @@ def index():
         return redirect(url_for('pokemon_info', name=pokedex_form.nom.data))
     return render_template('pokedex.html', pokedex_json=None, form=pokedex_form)
 
+@app.route('/pokemon/<name>')
+def pokemon_info(name):
+    pokedex_form = PokemonForm()
+    response = requests.get(
+        f'https://api-pokemon-fr.vercel.app/api/v1/pokemon/{name}')
+    reponse_data_json = response.json()
+    if len(reponse_data_json) == 2:
+        return render_template('pokedex.html', pokedex_json=None, form=pokedex_form, msg="Le pokemon n'existe pas.")
+    return render_template('pokedex.html', pokedex_json=reponse_data_json, form=pokedex_form)
+
+
 if __name__ == '__main__':
     app.run()
