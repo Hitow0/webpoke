@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cri pokémon</title>
+</head>
+<body>
+    <audio id="mySong" src="" controls></audio>
+<script>
+var xhr = new XMLHttpRequest();
+xhr.open('GET', '/getFileName', true);
+xhr.send();
+
+xhr.onreadystatechange = function() {
+    if (this.readyState == 4) {
+        var filePath = this.responseText;
+        var audio = document.getElementById('mySong');
+        audio.src = filePath;
+        audio.load();
+        audio.oncanplaythrough = function() {
+            this.play();
+        }
+    }
+}
+
+</script>
+
+</body>
+</html>
