@@ -13,6 +13,7 @@ body {
   height:80vh;
 }
 
+
 .pokedex > .top-part{
   position:relative;
   z-index: 2;
@@ -115,7 +116,7 @@ body {
   margin-top:0.4vw;
 }
 
-inner-found{
+.inner-found{
   grid-template-columns: 40% 60%;
   background-color: rgba(30, 30, 30, 1);
   width:calc(100% - 4vw);
@@ -192,6 +193,7 @@ inner-found{
 .pokemon-sprite > .evolution > .button-evolution > img{
   width: 1.09375vw;
 }
+
 
 .pokemon-informations{
   grid-column: 2;
