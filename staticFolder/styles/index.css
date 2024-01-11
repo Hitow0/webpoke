@@ -12,3 +12,30 @@ body {
   margin-top: 5vh;
   height:80vh;
 }
+
+.pokedex > .top-part{
+  position:relative;
+  z-index: 2;
+  background-color: rgba(255, 80, 80, 1);
+  width: 50vw;
+  height:50vh;
+  border-radius:1.56vw;
+  box-shadow: 0 0.2vw 0.2vw 0 rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pokedex > .top-part > .inner{
+  background-color: rgba(30, 30, 30, 1);
+  width:calc(100% - 4vw);
+  height:calc(100% - 4vw);
+  border-radius:1.56vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pokedex > .top-part > .inner > img{
+  width: 30vw;
+}
