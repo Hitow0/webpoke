@@ -107,6 +107,7 @@ def get_sprite_url():
     sprite_url = 'https://api-pokemon-fr.vercel.app/api/v1/pokemon/{obtenir_id_pokemon_aleatoire()}'
     return jsonify({'sprite_url': sprite_url})
 
+# Fonction pour ajouter une nouvelle ligne au fichier CSV
 def add_csv(id, name, filename='data.csv'):
     # Vérifier si le fichier CSV existe
     if not os.path.isfile(filename):
@@ -115,10 +116,40 @@ def add_csv(id, name, filename='data.csv'):
             writer = csv.writer(file)
             writer.writerow(['ID', 'Name'])
 
-    # Ajouter la nouvelle ligne avec l'ID et le nom
-    with open(filename, 'a', newline='', encoding='utf-8') as file:
-        writer = csv.writer(file)
-        writer.writerow([id, name])
+    # Vérifier si le couple ID et nom n'est pas déjà présent
+    if not is_duplicate(id, name, filename):
+        # Ajouter la nouvelle ligne avec l'ID et le nom
+        with open(filename, 'a', newline='', encoding='utf-8') as file:
+            writer = csv.writer(file)
+            writer.writerow([id, name])
+        return True  # La ligne a été ajoutée avec succès
+    else:
+        return False  # Le couple ID et nom est déjà présent
+
+# Fonction pour vérifier si le couple ID et nom est déjà présent dans le fichier CSV
+def is_duplicate(id, name, filename='data.csv'):
+    existing_data = read_csv(filename)
+    return str(id) in existing_data
+
+
+def read_csv(filename='data.csv'):
+    data = {}
+    with open(filename, 'r', newline='', encoding='utf-8') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            data[row['ID']] = row['Name']
+    return data
+
+def sort_dict_by_id(data):
+    sorted_data = dict(sorted(data.items(), key=lambda item: int(item[0])))
+    return sorted_data
+
+@app.route('/pokedex', methods=['GET'])
+def pokedex():
+    data = sort_dict_by_id(read_csv("data.csv"))
+    return render_template('favoris.html', data=data)
+
+
 
 
 

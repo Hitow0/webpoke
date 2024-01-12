@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WebPoke</title>
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/index.css') }}">
+
+</head>
+<body>
+    <h1>Votre pokédex personnel</h1>
+
+    <script>
+        function redirectHome() {
+            window.location.href = "/"
+        }
+    </script>
+
+    <div class="button-accueil" onclick="redirectHome()">
+        <p>Accueil</p>
+    </div>
+
+    {% if data %}
+        {% for id, name in data.items() %}
+            <div>
+            <p>ID: {{ id }}</p>
+            <p> Nom: <a href="pokemon/{{ name }}">{{ name }}</a></p>
+           <img src="https://raw.githubusercontent.com/Yarkis01/PokeAPI/images/sprites/{{ id }}/regular.png">
+            </div>
+{% endfor %}
+    {% endif %}
+</body>
+</html>
