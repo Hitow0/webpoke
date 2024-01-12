@@ -42,9 +42,20 @@ def pokemon_index():
 def pokemon_info(name):
     pokedex_form = PokemonForm()
     data = remove_accents(name)
+    regions = ["Paldea", "Alola", "Hisui", "Galar"]
     response = requests.get(
         f'https://api-pokemon-fr.vercel.app/api/v1/pokemon/{data}')
     reponse_data_json = response.json()
+
+    for region in regions:
+        if name.__contains__(region):
+            newName = name.split(" ")
+            data = remove_accents(newName[0])
+            response = requests.get(
+                f'https://api-pokemon-fr.vercel.app/api/v1/pokemon/{data}/{region.lower()}')
+            print(region)
+            reponse_data_json = response.json()
+
     if len(reponse_data_json) == 2:
         return render_template('pokedex.html', pokedex_json=None, form=pokedex_form, msg="Le pokemon n'existe pas.")
     return render_template('pokedex.html', pokedex_json=reponse_data_json, form=pokedex_form)
