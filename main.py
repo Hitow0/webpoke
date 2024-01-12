@@ -78,7 +78,7 @@ def game():
     reponse_data_json = response.json()
 
     if game_form.validate_on_submit():
-        if game_form.nom.data.lower() == reponse_data_json['name']['fr'].lower():
+        if remove_accents(game_form.nom.data.lower()) == remove_accents(reponse_data_json['name']['fr'].lower()):
             print("Bravo ! Vous avez trouvé le Pokémon !")
             session['current_msg'] = "Bravo ! Vous avez trouvé le Pokémon !"
 
