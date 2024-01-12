@@ -47,7 +47,10 @@ def pokemon_index():
 @app.route('/pokemon/<name>')
 def pokemon_info(name):
     pokedex_form = PokemonForm()
-    data = retrait_espace(remove_accents(name))
+    if retrait_espace(remove_accents(name)) == "MimeJr.":
+        data = 439
+    else:
+        data = retrait_espace(remove_accents(name))
     regions = ["Paldea", "Alola", "Hisui", "Galar"]
     response = requests.get(
         f'https://api-pokemon-fr.vercel.app/api/v1/pokemon/{data}')
