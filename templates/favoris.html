@@ -13,20 +13,32 @@
         function redirectHome() {
             window.location.href = "/"
         }
+
+        function redirectResearch(id) {
+            window.location.href = "/pokemon/"+id
+        }
+
     </script>
 
-    <div class="button-accueil" onclick="redirectHome()">
-        <p>Accueil</p>
-    </div>
+
+    <div class="pokedex">
 
     {% if data %}
+        <div class="top-part">
+                <div class="inner-pokedex">
         {% for id, name in data.items() %}
-            <div>
-            <p>ID: {{ id }}</p>
-            <p> Nom: <a href="pokemon/{{ name }}">{{ name }}</a></p>
-           <img src="https://raw.githubusercontent.com/Yarkis01/PokeAPI/images/sprites/{{ id }}/regular.png">
+
+            <div class="sprite-pokedex" onclick="redirectResearch({{ id }})">
+                <img class="pokeball" src="{{ url_for('static', filename='img/pokeball.png') }}" alt="pokeball">
+                <img class="sprite" src="https://raw.githubusercontent.com/Yarkis01/PokeAPI/images/sprites/{{ id }}/regular.png" alt="{{ name }}">
             </div>
 {% endfor %}
+                </div>
+        </div>
     {% endif %}
+    </div>
+
+
+
 </body>
 </html>

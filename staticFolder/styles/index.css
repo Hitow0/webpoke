@@ -147,6 +147,20 @@ body {
   display: grid;
 }
 
+.inner-pokedex{
+  background-color: rgba(30, 30, 30, 1);
+  width:calc(100% - 4vw);
+  height:calc(100% - 4vw);
+  border-radius:1.56vw;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  overflow-y: auto;
+  gap: 1vw;
+  justify-content: center;
+  align-items: center;
+}
+
 .pokemon-sprite{
   grid-column: 1;
   display: flex;
@@ -197,6 +211,26 @@ body {
 .pokemon-sprite > .evolution{
   display: flex;
   gap:1vw;
+}
+
+.sprite-pokedex > .sprite{
+  position: relative;
+  width: 9vw;
+  transform: translate(18%, -125%);
+  z-index: 3;
+
+}
+.sprite-pokedex > .pokeball{
+  position: relative;
+  width: 13vw;
+  mix-blend-mode: hard-light;
+  z-index: 2;
+
+}
+
+.sprite-pokedex{
+  width: 13vw;
+  height: 13vw;
 }
 
 .pokemon-sprite > .evolution > .button-evolution{
@@ -312,6 +346,7 @@ body {
 
   filter:brightness(0);
 }
+
 
 .pokemon-sprite-game{
   display: flex;
