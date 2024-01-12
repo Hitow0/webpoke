@@ -1,3 +1,5 @@
+import csv
+import os
 import random
 
 import requests as requests
@@ -68,7 +70,11 @@ def game():
 
     if game_form.validate_on_submit():
         if game_form.nom.data.lower() == reponse_data_json['name']['fr'].lower():
+
+            add_csv(reponse_data_json["pokedexId"], reponse_data_json["name"]['fr'])
+
             print("Bravo ! Vous avez trouvé le Pokémon !")
+
             session['current_msg'] = "Bravo ! Vous avez trouvé le Pokémon !"
 
             # Procéder à l'ajout dans la base de données
@@ -100,6 +106,20 @@ def get_sprite_url():
     # Utilisez votre fonction pour obtenir un nouvel ID aléatoire et retournez l'URL du sprite
     sprite_url = 'https://api-pokemon-fr.vercel.app/api/v1/pokemon/{obtenir_id_pokemon_aleatoire()}'
     return jsonify({'sprite_url': sprite_url})
+
+def add_csv(id, name, filename='data.csv'):
+    # Vérifier si le fichier CSV existe
+    if not os.path.isfile(filename):
+        # Si le fichier n'existe pas, le créer avec un en-tête
+        with open(filename, 'w', newline='', encoding='utf-8') as file:
+            writer = csv.writer(file)
+            writer.writerow(['ID', 'Name'])
+
+    # Ajouter la nouvelle ligne avec l'ID et le nom
+    with open(filename, 'a', newline='', encoding='utf-8') as file:
+        writer = csv.writer(file)
+        writer.writerow([id, name])
+
 
 
 if __name__ == '__main__':
