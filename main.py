@@ -19,6 +19,10 @@ def remove_accents(input_str):
     return ''.join([c for c in nfkd_form if not unicodedata.combining(c)])
 
 
+def retrait_espace(nom):
+    return nom.replace(" ", "")
+
+
 class PokemonForm(FlaskForm):
     nom = StringField("nom", validators=[DataRequired()])
 
@@ -43,10 +47,21 @@ def pokemon_index():
 @app.route('/pokemon/<name>')
 def pokemon_info(name):
     pokedex_form = PokemonForm()
-    data = remove_accents(name)
+    data = retrait_espace(remove_accents(name))
+    regions = ["Paldea", "Alola", "Hisui", "Galar"]
     response = requests.get(
         f'https://api-pokemon-fr.vercel.app/api/v1/pokemon/{data}')
     reponse_data_json = response.json()
+
+    for region in regions:
+        if name.__contains__(region):
+            newName = name.split(" ")
+            data = remove_accents(newName[0])
+            response = requests.get(
+                f'https://api-pokemon-fr.vercel.app/api/v1/pokemon/{data}/{region.lower()}')
+            print(region)
+            reponse_data_json = response.json()
+
     if len(reponse_data_json) == 2:
         return render_template('pokedex.html', pokedex_json=None, form=pokedex_form, msg="Le pokemon n'existe pas.")
     return render_template('pokedex.html', pokedex_json=reponse_data_json, form=pokedex_form)
@@ -69,8 +84,7 @@ def game():
     reponse_data_json = response.json()
 
     if game_form.validate_on_submit():
-        if game_form.nom.data.lower() == reponse_data_json['name']['fr'].lower():
-
+        if remove_accents(game_form.nom.data.lower()) == remove_accents(reponse_data_json['name']['fr'].lower()):
             add_csv(reponse_data_json["pokedexId"], reponse_data_json["name"]['fr'])
 
             print("Bravo ! Vous avez trouvé le Pokémon !")
