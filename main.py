@@ -31,6 +31,10 @@ class WhosThatPokemon(FlaskForm):
     nom = StringField('nom', validators=[DataRequired()])
 
 
+class FavorisForm(FlaskForm):
+    nom = StringField('nom')
+
+
 @app.route("/", methods=['GET', 'POST'])
 def index():
     return render_template('accueil.html')
@@ -62,7 +66,6 @@ def pokemon_info(name):
             data = remove_accents(newName[0])
             response = requests.get(
                 f'https://api-pokemon-fr.vercel.app/api/v1/pokemon/{data}/{region.lower()}')
-            print(region)
             reponse_data_json = response.json()
 
     if len(reponse_data_json) == 2:
@@ -90,15 +93,10 @@ def game():
         if remove_accents(game_form.nom.data.lower()) == remove_accents(reponse_data_json['name']['fr'].lower()):
             add_csv(reponse_data_json["pokedexId"], reponse_data_json["name"]['fr'])
 
-            print("Bravo ! Vous avez trouvé le Pokémon !")
-
             session['current_msg'] = "Bravo ! Vous avez trouvé le Pokémon !"
-
-            # Procéder à l'ajout dans la base de données
 
             session.pop('current_pokemon_id', None)
         else:
-            print("Erreur !")
             session['current_msg'] = "Erreur ! Vous n'avez pas trouvé le pokemon !"
 
             session.pop('current_pokemon_id', None)
@@ -118,32 +116,21 @@ def obtenir_id_pokemon_aleatoire():
     return random.randint(1, 1017)
 
 
-@app.route('/get_sprite_url', methods=['GET'])
-def get_sprite_url():
-    # Utilisez votre fonction pour obtenir un nouvel ID aléatoire et retournez l'URL du sprite
-    sprite_url = 'https://api-pokemon-fr.vercel.app/api/v1/pokemon/{obtenir_id_pokemon_aleatoire()}'
-    return jsonify({'sprite_url': sprite_url})
-
-# Fonction pour ajouter une nouvelle ligne au fichier CSV
 def add_csv(id, name, filename='data.csv'):
-    # Vérifier si le fichier CSV existe
     if not os.path.isfile(filename):
-        # Si le fichier n'existe pas, le créer avec un en-tête
         with open(filename, 'w', newline='', encoding='utf-8') as file:
             writer = csv.writer(file)
             writer.writerow(['ID', 'Name'])
 
-    # Vérifier si le couple ID et nom n'est pas déjà présent
     if not is_duplicate(id, name, filename):
-        # Ajouter la nouvelle ligne avec l'ID et le nom
         with open(filename, 'a', newline='', encoding='utf-8') as file:
             writer = csv.writer(file)
             writer.writerow([id, name])
-        return True  # La ligne a été ajoutée avec succès
+        return True
     else:
-        return False  # Le couple ID et nom est déjà présent
+        return False
 
-# Fonction pour vérifier si le couple ID et nom est déjà présent dans le fichier CSV
+
 def is_duplicate(id, name, filename='data.csv'):
     existing_data = read_csv(filename)
     return str(id) in existing_data
@@ -157,17 +144,30 @@ def read_csv(filename='data.csv'):
             data[row['ID']] = row['Name']
     return data
 
+
 def sort_dict_by_id(data):
     sorted_data = dict(sorted(data.items(), key=lambda item: int(item[0])))
     return sorted_data
 
-@app.route('/pokedex', methods=['GET'])
+
+@app.route('/pokedex', methods=['GET', 'POST'])
 def pokedex():
+    favoris_form = FavorisForm()
+
+    if not os.path.exists("data.csv"):
+        data = {}
+        return render_template('favoris.html', data=data, form=favoris_form, message="File not found: data.csv")
+
+    if favoris_form.validate_on_submit():
+        all_data = read_csv("data.csv")
+        filtered_data = {}
+        for id, name in all_data.items():
+            if name.lower().startswith(favoris_form.nom.data.lower()):
+                filtered_data[id] = name
+        return render_template('favoris.html', data=filtered_data, form=favoris_form)
+
     data = sort_dict_by_id(read_csv("data.csv"))
-    return render_template('favoris.html', data=data)
-
-
-
+    return render_template('favoris.html', data=data, form=favoris_form)
 
 
 if __name__ == '__main__':
