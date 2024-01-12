@@ -17,8 +17,15 @@
                 <div class="inner">
                     <div class="pokemon-sprite-game">
                         <img class="pokeball" src="{{ url_for('static', filename='img/pokeball.png') }}" alt="pokeball">
-                        <img class="sprite" src="{{ pokemon.sprites.regular }}" alt="??">
+                        <img class="sprite" src="{{ pokemon.sprites.regular }}" alt="??" id="nonDraggableImage">
                     </div>
+
+                    <script>
+                        document.getElementById("nonDraggableImage").onmousedown = function (e) {
+                            e.preventDefault();
+                        };
+                    </script>
+
                 </div>
             </div>
             <div class="bottom-part">
