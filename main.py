@@ -17,6 +17,10 @@ def remove_accents(input_str):
     return ''.join([c for c in nfkd_form if not unicodedata.combining(c)])
 
 
+def retrait_espace(nom):
+    return nom.replace(" ", "")
+
+
 class PokemonForm(FlaskForm):
     nom = StringField("nom", validators=[DataRequired()])
 
@@ -41,7 +45,7 @@ def pokemon_index():
 @app.route('/pokemon/<name>')
 def pokemon_info(name):
     pokedex_form = PokemonForm()
-    data = remove_accents(name)
+    data = retrait_espace(remove_accents(name))
     regions = ["Paldea", "Alola", "Hisui", "Galar"]
     response = requests.get(
         f'https://api-pokemon-fr.vercel.app/api/v1/pokemon/{data}')

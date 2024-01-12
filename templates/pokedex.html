@@ -67,12 +67,12 @@
                         {% if pokedex_json.evolution %}
                             <div class="evolution">
                                 {% if pokedex_json.evolution.pre %}
-                                    <button class="button-evolution" onclick="redirectPreEvolution('{{ pokedex_json.evolution.pre[-1].name }}')" title="{{ pokedex_json.evolution.pre[-1].condition }}">
+                                    <button class="button-evolution" onclick="redirectPreEvolution('{{ pokedex_json.evolution.pre[-1].pokedexId }}')" title="{{ pokedex_json.evolution.pre[-1].condition }}">
                                         <img src="{{ url_for('static', filename='img/fleche.png') }}" alt="arrow">
                                     </button>
                                 {% endif %}
                                 {% if pokedex_json.evolution.next %}
-                                    <button class="button-evolution" onclick="redirectNextEvolution('{{ pokedex_json.evolution.next[0].name }}')" title="{{ pokedex_json.evolution.next[0].condition}}">
+                                    <button class="button-evolution" onclick="redirectNextEvolution('{{ pokedex_json.evolution.next[0].pokedexId }}')" title="{{ pokedex_json.evolution.next[0].condition}}">
                                         <img style="transform: rotate(180deg)" src="{{ url_for('static', filename='img/fleche.png') }}" alt="arrow">
                                     </button>
                                 {% endif %}
