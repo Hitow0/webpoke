@@ -73,7 +73,7 @@
                                 {% endif %}
                                 {% if pokedex_json.evolution.next %}
                                     <button class="button-evolution" onclick="redirectNextEvolution('{{ pokedex_json.evolution.next[0].name }}')" title="{{ pokedex_json.evolution.next[0].condition}}">
-                                        <img style="rotate: 180deg" src="{{ url_for('static', filename='img/fleche.png') }}" alt="arrow">
+                                        <img style="transform: rotate(180deg)" src="{{ url_for('static', filename='img/fleche.png') }}" alt="arrow">
                                     </button>
                                 {% endif %}
                             </div>
