@@ -47,7 +47,7 @@ body {
   top: 53.5vh;
   background-color: rgba(255, 80, 80, 1);
   width: 80vw;
-  height:40vh;
+  height:45vh;
   border-radius:1.56vw;
   box-shadow: 0 0.2vw 0.2vw 0 rgba(0, 0, 0, 0.5);
   display: flex;
@@ -269,6 +269,7 @@ body {
 }
 
 .inner > .home-title{
+  margin-top:5vh;
   margin-bottom: 0;
   font-size: 1.7vw;
 }
