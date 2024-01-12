@@ -147,6 +147,20 @@ body {
   display: grid;
 }
 
+.inner-pokedex{
+  background-color: rgba(30, 30, 30, 1);
+  width:calc(100% - 4vw);
+  height:calc(100% - 4vw);
+  border-radius:1.56vw 0 0 1.56vw;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  overflow-y: auto;
+  gap: 1vw;
+  justify-content: center;
+  align-items: center;
+}
+
 .pokemon-sprite{
   grid-column: 1;
   display: flex;
@@ -197,7 +211,6 @@ body {
 .pokemon-sprite > .evolution{
   display: flex;
   gap:1vw;
-  overflow-x: scroll;
   width: 90%;
   justify-content: center;
 }
@@ -214,8 +227,30 @@ body {
 }
 
 
+.sprite-pokedex > .sprite{
+  position: relative;
+  width: 9vw;
+  transform: translate(18%, -125%);
+  z-index: 3;
+  cursor:pointer;
+}
+.sprite-pokedex > .pokeball{
+  position: relative;
+  width: 13vw;
+  mix-blend-mode: hard-light;
+  z-index: 2;
+  cursor:pointer;
+
+}
+
+.sprite-pokedex{
+  width: 13vw;
+  height: 13vw;
+}
+
 .pokemon-sprite > .evolution > .multiple_evolutions > .button-evolution, .pokemon-sprite > .evolution > .button-evolution{
-  display: flex;
+
+    display: flex;
   border:none;
   box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.50);
   background-color: #454545;
@@ -336,6 +371,7 @@ body {
   filter:brightness(0);
 }
 
+
 .pokemon-sprite-game{
   display: flex;
   align-items: center;
@@ -365,10 +401,12 @@ body {
 /* Pour les navigateurs basés sur WebKit (Chrome, Safari) */
 ::-webkit-scrollbar {
   width: 12px;
+  border-radius: 1.56vw;
 }
 
 ::-webkit-scrollbar-track {
   background-color: rgba(30, 30, 30, 1);
+  border-radius: 1.56vw;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -384,7 +422,7 @@ body {
 /* Note: Firefox ne prend pas en charge la personnalisation de la scrollbar avec CSS standard. L'utilisation de pseudo-éléments spécifiques à Firefox est nécessaire. */
 /* Cependant, cette approche peut ne pas fonctionner dans les versions futures de Firefox, car elle n'est pas une norme CSS. */
 * {
-  scrollbar-color: #888 #f1f1f1;
+  scrollbar-color: rgba(30, 30, 30, 1);
 }
 
 *::-moz-scrollbar-thumb {

@@ -1,3 +1,5 @@
+import csv
+import os
 import random
 
 import requests as requests
@@ -29,6 +31,10 @@ class WhosThatPokemon(FlaskForm):
     nom = StringField('nom', validators=[DataRequired()])
 
 
+class FavorisForm(FlaskForm):
+    nom = StringField('nom')
+
+
 @app.route("/", methods=['GET', 'POST'])
 def index():
     return render_template('accueil.html')
@@ -45,7 +51,10 @@ def pokemon_index():
 @app.route('/pokemon/<name>')
 def pokemon_info(name):
     pokedex_form = PokemonForm()
-    data = retrait_espace(remove_accents(name))
+    if retrait_espace(remove_accents(name)) == "MimeJr.":
+        data = 439
+    else:
+        data = retrait_espace(remove_accents(name))
     regions = ["Paldea", "Alola", "Hisui", "Galar"]
     response = requests.get(
         f'https://api-pokemon-fr.vercel.app/api/v1/pokemon/{data}')
@@ -57,7 +66,6 @@ def pokemon_info(name):
             data = remove_accents(newName[0])
             response = requests.get(
                 f'https://api-pokemon-fr.vercel.app/api/v1/pokemon/{data}/{region.lower()}')
-            print(region)
             reponse_data_json = response.json()
 
     if len(reponse_data_json) == 2:
@@ -83,14 +91,12 @@ def game():
 
     if game_form.validate_on_submit():
         if remove_accents(game_form.nom.data.lower()) == remove_accents(reponse_data_json['name']['fr'].lower()):
-            print("Bravo ! Vous avez trouvé le Pokémon !")
-            session['current_msg'] = "Bravo ! Vous avez trouvé le Pokémon !"
+            add_csv(reponse_data_json["pokedexId"], reponse_data_json["name"]['fr'])
 
-            # Procéder à l'ajout dans la base de données
+            session['current_msg'] = "Bravo ! Vous avez trouvé le Pokémon !"
 
             session.pop('current_pokemon_id', None)
         else:
-            print("Erreur !")
             session['current_msg'] = "Erreur ! Vous n'avez pas trouvé le pokemon !"
 
             session.pop('current_pokemon_id', None)
@@ -110,11 +116,58 @@ def obtenir_id_pokemon_aleatoire():
     return random.randint(1, 1017)
 
 
-@app.route('/get_sprite_url', methods=['GET'])
-def get_sprite_url():
-    # Utilisez votre fonction pour obtenir un nouvel ID aléatoire et retournez l'URL du sprite
-    sprite_url = 'https://api-pokemon-fr.vercel.app/api/v1/pokemon/{obtenir_id_pokemon_aleatoire()}'
-    return jsonify({'sprite_url': sprite_url})
+def add_csv(id, name, filename='data.csv'):
+    if not os.path.isfile(filename):
+        with open(filename, 'w', newline='', encoding='utf-8') as file:
+            writer = csv.writer(file)
+            writer.writerow(['ID', 'Name'])
+
+    if not is_duplicate(id, name, filename):
+        with open(filename, 'a', newline='', encoding='utf-8') as file:
+            writer = csv.writer(file)
+            writer.writerow([id, name])
+        return True
+    else:
+        return False
+
+
+def is_duplicate(id, name, filename='data.csv'):
+    existing_data = read_csv(filename)
+    return str(id) in existing_data
+
+
+def read_csv(filename='data.csv'):
+    data = {}
+    with open(filename, 'r', newline='', encoding='utf-8') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            data[row['ID']] = row['Name']
+    return data
+
+
+def sort_dict_by_id(data):
+    sorted_data = dict(sorted(data.items(), key=lambda item: int(item[0])))
+    return sorted_data
+
+
+@app.route('/pokedex', methods=['GET', 'POST'])
+def pokedex():
+    favoris_form = FavorisForm()
+
+    if not os.path.exists("data.csv"):
+        data = {}
+        return render_template('favoris.html', data=data, form=favoris_form, message="File not found: data.csv")
+
+    if favoris_form.validate_on_submit():
+        all_data = read_csv("data.csv")
+        filtered_data = {}
+        for id, name in all_data.items():
+            if name.lower().startswith(favoris_form.nom.data.lower()):
+                filtered_data[id] = name
+        return render_template('favoris.html', data=filtered_data, form=favoris_form)
+
+    data = sort_dict_by_id(read_csv("data.csv"))
+    return render_template('favoris.html', data=data, form=favoris_form)
 
 
 if __name__ == '__main__':
