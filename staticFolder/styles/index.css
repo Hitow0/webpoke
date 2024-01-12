@@ -232,6 +232,12 @@ body {
   width: 1.09375vw;
 }
 
+.pokemons-stats > p{
+   margin-right: 0;
+  margin-left: 1vw;
+  margin-top:0.1vw;
+  font-size: 1.2vw;
+}
 
 .pokemon-informations{
   grid-column: 2;

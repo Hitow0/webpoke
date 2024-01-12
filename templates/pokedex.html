@@ -116,6 +116,14 @@
                             {% endfor %}
                             </div>
                         </div>
+                        <div class="pokemons-stats">
+                            <p>Points de vie : {{pokedex_json.stats.hp}}<br>
+                            Attaque : {{pokedex_json.stats.atk}}<br>
+                            Défense :{{pokedex_json.stats.def}}<br>
+                            Attaque spéciale : {{pokedex_json.stats.spe_atk}}<br>
+                            Défense spéciale : {{pokedex_json.stats.spe_def}}<br>
+                            Vitesse : {{ pokedex_json.stats.vit }}</p>
+                        </div>
                     </div>
                 </div>
             </div>
