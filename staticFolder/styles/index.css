@@ -9,8 +9,8 @@ body {
 .pokedex {
   display: flex;
   justify-content: center;
-  margin-top: 5vh;
-  height:80vh;
+  margin-top: 2.5vw;
+  height:100%;
 }
 
 
@@ -75,7 +75,7 @@ body {
 
 
 .pokedex > .bottom-part > .inner > .search-bar > form > #nom{
-  height: 3.5vh;
+  height: 1.75vw;
   width: 25vw;
   background-color: rgba(0,0,0,0.25);
   border-radius: 1.7vw 0 0 1.7vw;
@@ -89,7 +89,7 @@ body {
 }
 
 .pokedex > .bottom-part > .inner > .search-bar > form > .button{
-  height: 3.5vh;
+  height: 1.75vw;
   width: 3vw;
   background-color: rgba(0,0,0,0.25);
   border-radius: 0 1.7vw 1.7vw 0;
@@ -308,7 +308,7 @@ body {
 }
 
 .inner > .home-title{
-  margin-top:5vh;
+  margin-top:2.5vw;
   margin-bottom: 0;
   font-size: 1.7vw;
 }
