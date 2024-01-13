@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>WebPoke</title>
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/index.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static',filename='favicon.ico') }}">
 </head>
 <body>
 
@@ -64,14 +65,23 @@
                         </button>
                         <img class="sprite" src="{{ pokedex_json.sprites.regular }}" alt="{{pokedex_json.name.fr}}">
                         {% if pokedex_json.evolution %}
-                            <div class="evolution" style="{% if (pokedex_json.evolution.next and pokedex_json.evolution.next|length > 2) %} justify-content:start ; overflow-x: auto {% endif %}">
+                            <div class="evolution" style="{% if (pokedex_json.evolution.next and pokedex_json.evolution.next|length > 3) %} justify-content:start ; overflow-x: auto {% endif %}">
                                 {% if pokedex_json.evolution.pre %}
+                                    {% if  pokedex_json.pokedexId == 160 %}
+                                         <div class="multiple_evolutions">
+                                            <button class="button-evolution" onclick="redirectPreEvolution(`{{ pokedex_json.evolution.pre[-1].pokedexId }}`)" title="{{ pokedex_json.evolution.pre[-1].condition }}">
+                                                <img src="{{ url_for('static', filename='img/fleche.png') }}" alt="arrow">
+                                            </button>
+                                            <p>Crocrodil</p>
+                                        </div>
+                                    {% else %}
                                     <div class="multiple_evolutions">
                                         <button class="button-evolution" onclick="redirectPreEvolution(`{{ pokedex_json.evolution.pre[-1].name }}`)" title="{{ pokedex_json.evolution.pre[-1].condition }}">
                                             <img src="{{ url_for('static', filename='img/fleche.png') }}" alt="arrow">
                                         </button>
                                         <p>{{pokedex_json.evolution.pre[-1].name}}</p>
                                     </div>
+                                    {% endif %}
 
                                 {% endif %}
                                 {% if pokedex_json.evolution.next %}
@@ -93,12 +103,12 @@
                                                 <p>{{pokedex_json.evolution.next[i].name}}</p>
                                             </div>
                                         {% endfor %}
-                                    {% elif pokedex_json.pokedexId == 122 %}
+                                    {% elif  [122, 158].__contains__(pokedex_json.pokedexId) %}
                                         <div class="multiple_evolutions">
                                             <button class="button-evolution" onclick="redirectNextEvolution(`{{ pokedex_json.evolution.next[0].pokedexId }}`)" title="{{ pokedex_json.evolution.next[0].condition}}">
                                                 <img style="transform: rotate(180deg)" src="{{ url_for('static', filename='img/fleche.png') }}" alt="arrow">
                                             </button>
-                                            <p>{{pokedex_json.evolution.next[0].name}}</p>
+                                            <p>{% if pokedex_json.evolution.next[0].pokedexId != 159 %} {{pokedex_json.evolution.next[0].name}} {% else %} Crocrodil {% endif %}</p>
                                         </div>
                                     {% else %}
                                         <div class="multiple_evolutions">
