@@ -69,7 +69,7 @@ def pokemon_info(name):
     reponse_data_json = response.json()
 
     for region in regions:
-        if name.__contains__(region):
+        if name.lower().__contains__(region.lower()):
             newName = name.split(" ")
             data = remove_accents(newName[0])
             response = requests.get(
