@@ -78,6 +78,19 @@ def pokemon_info(name):
 
     if len(reponse_data_json) == 2:
         return render_template('pokedex.html', pokedex_json=None, form=pokedex_form, msg="Le pokemon n'existe pas.")
+
+    # tab = []
+    # for i in range(1,722):
+    #     pokemon_info = requests.get(
+    #             f'https://api-pokemon-fr.vercel.app/api/v1/pokemon/{i}').json()
+    #     pokemon_gen = pokemon_info['generation']
+    #     pokemon_name = pokemon_info['name']['fr']
+    #     audio_url = f'http://127.0.0.1:5000/staticFolder/CrisPokemon/génération%20{pokemon_gen}/{i}%20-%20{pokemon_name.lower()}.ogg'
+    #     audio_response = requests.get(audio_url)
+    #
+    #     if audio_response.status_code == 404:
+    #         tab.append(i)
+    # print(tab)
     return render_template('pokedex.html', pokedex_json=reponse_data_json, form=pokedex_form)
 
 

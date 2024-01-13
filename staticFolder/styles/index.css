@@ -19,7 +19,7 @@ body {
   z-index: 2;
   background-color: rgba(255, 80, 80, 1);
   width: 50vw;
-  height:50vh;
+  height:25vw;
   border-radius:1.56vw;
   box-shadow: 0 0.2vw 0.2vw 0 rgba(0, 0, 0, 0.5);
   display: flex;
@@ -44,10 +44,10 @@ body {
 .pokedex > .bottom-part{
   position:absolute;
   z-index: 1;
-  top: 53.5vh;
+  top: 26vw;
   background-color: rgba(255, 80, 80, 1);
   width: 80vw;
-  height:45vh;
+  height: 22vw;
   border-radius:1.56vw;
   box-shadow: 0 0.2vw 0.2vw 0 rgba(0, 0, 0, 0.5);
   display: flex;
@@ -277,7 +277,7 @@ body {
 .pokemon-informations{
   grid-column: 2;
   border-radius:1.56vw;
-  margin: 2.0833333333333335vw 2.0833333333333335vw 2.0833333333333335vw 2.0833333333333335vw;
+  margin: 1.3020833333333333vw 1.3020833333333333vw 1.3020833333333333vw 1.3020833333333333vw;
   background: #454545;
 }
 
@@ -289,9 +289,7 @@ body {
 }
 
 .pokemon-informations > .name-line > p {
-  margin-right: 0;
-  margin-left: 1vw;
-  margin-top:0.5vw;
+  margin: 0.5vw 0 0 1vw;
   font-size: 1.5vw;
 }
 
@@ -324,7 +322,7 @@ body {
 
 .inner > .cards > .card{
   width: 10vw;
-  height: 22vh;
+  height: 11vw;
   border-radius:1.56vw;
   display: flex;
   align-items: center;
@@ -432,4 +430,9 @@ body {
 
 *::-moz-scrollbar-thumb:hover {
   background-color: #555;
+}
+
+audio {
+  width: 15.625vw;
+  height: 2.8125vw;
 }
