@@ -44,31 +44,6 @@
     }
 </script>
 
-    <script>
-
-    var xhr = new XMLHttpRequest();
-<!--    xhr.open('GET', '/staticFolder/CrisPokemon/génération 1/1 - bulbizarre.ogg', true);-->
-
-    xhr.open('GET', '/staticFolder/CrisPokemon/génération{{pokedex_json.generation}}/{{pokedex_json.pokedexId}}-{{pokedex_json.name.fr}}.ogg', true);
-    xhr.send();
-
-
-    xhr.onreadystatechange = function() {
-        if (this.readyState == 4) {
-            var filePath = this.responseText;
-            var audio = document.getElementById('mySong');
-            audio.src = filePath;
-            audio.load();
-            audio.oncanplaythrough = function() {
-                this.play();
-            }
-        }
-    }
-
-
-    </script>
-
-
     {% if form %}
         <div class="pokedex">
         {% if pokedex_json %}
@@ -146,9 +121,11 @@
                                 <img src="{{ types.image }}" alt="{{types.name}}">
                             {% endfor %}
                             </div>
-                            <audio id="mySong" src="" controls></audio>
+
 
                         </div>
+
+
                         <div class="pokemons-stats">
                             <p>Points de vie : {{pokedex_json.stats.hp}}<br>
                             Attaque : {{pokedex_json.stats.atk}}<br>
@@ -156,6 +133,11 @@
                             Attaque spéciale : {{pokedex_json.stats.spe_atk}}<br>
                             Défense spéciale : {{pokedex_json.stats.spe_def}}<br>
                             Vitesse : {{ pokedex_json.stats.vit }}</p>
+                            {% if pokedex_json.generation <= 6 %}
+                                  <audio id="mySong" src="/staticFolder/CrisPokemon/génération {{ pokedex_json.generation }}/{{ pokedex_json.pokedexId }} - {{ pokedex_json.name.fr|lower }}.ogg" controls></audio>
+                            {% else %}
+                                  <p>L'audio est indisponible</p>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
