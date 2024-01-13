@@ -51,8 +51,16 @@ def pokemon_index():
 @app.route('/pokemon/<name>')
 def pokemon_info(name):
     pokedex_form = PokemonForm()
-    if retrait_espace(remove_accents(name)) == "MimeJr.":
+    if retrait_espace(remove_accents(name)).lower() == "MimeJr.".lower():
         data = 439
+    elif [retrait_espace(remove_accents("Nidoran♀")).lower(),
+          retrait_espace(remove_accents("nidoran femelle")).lower()].__contains__(
+          retrait_espace(remove_accents(name)).lower()):
+        data = 29
+    elif [retrait_espace(remove_accents("Nidoran♂")).lower(),
+          retrait_espace(remove_accents("nidoran mâle")).lower()].__contains__(
+          retrait_espace(remove_accents(name)).lower()):
+        data = 32
     else:
         data = retrait_espace(remove_accents(name))
     regions = ["Paldea", "Alola", "Hisui", "Galar"]
@@ -90,7 +98,7 @@ def game():
     reponse_data_json = response.json()
 
     if game_form.validate_on_submit():
-        if remove_accents(game_form.nom.data.lower()) == remove_accents(reponse_data_json['name']['fr'].lower()):
+        if retrait_espace(remove_accents(game_form.nom.data.lower())) == retrait_espace(remove_accents(reponse_data_json['name']['fr'].lower())) or (retrait_espace(remove_accents(game_form.nom.data.lower())) == retrait_espace(remove_accents("nidoran femelle".lower())) and retrait_espace(remove_accents(reponse_data_json['name']['fr'].lower())) == retrait_espace(remove_accents("Nidoran♀".lower()))) or (retrait_espace(remove_accents(game_form.nom.data.lower())) == retrait_espace(remove_accents("nidoran mâle".lower())) and retrait_espace(remove_accents(reponse_data_json['name']['fr'].lower())) == retrait_espace(remove_accents("Nidoran♂".lower()))):
             add_csv(reponse_data_json["pokedexId"], reponse_data_json["name"]['fr'])
 
             session['current_msg'] = "Bravo ! Vous avez trouvé le Pokémon !"
