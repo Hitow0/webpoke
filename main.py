@@ -112,7 +112,8 @@ def game():
 
     if game_form.validate_on_submit():
         if retrait_espace(remove_accents(game_form.nom.data.lower())) == retrait_espace(remove_accents(reponse_data_json['name']['fr'].lower())) or (retrait_espace(remove_accents(game_form.nom.data.lower())) == retrait_espace(remove_accents("nidoran femelle".lower())) and retrait_espace(remove_accents(reponse_data_json['name']['fr'].lower())) == retrait_espace(remove_accents("Nidoran♀".lower()))) or (retrait_espace(remove_accents(game_form.nom.data.lower())) == retrait_espace(remove_accents("nidoran mâle".lower())) and retrait_espace(remove_accents(reponse_data_json['name']['fr'].lower())) == retrait_espace(remove_accents("Nidoran♂".lower()))):
-            add_csv(reponse_data_json["pokedexId"], reponse_data_json["name"]['fr'])
+            print(reponse_data_json)
+            add_csv(reponse_data_json["pokedex_id"], reponse_data_json["name"]['fr'])
 
             session['current_msg'] = "Bravo ! Vous avez trouvé le Pokémon !"
 
